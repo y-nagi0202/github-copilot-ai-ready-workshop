@@ -1,14 +1,18 @@
+import { Link } from 'react-router-dom';
 import type { Product } from '../types';
+import { formatPrice } from '../lib/price';
 
 interface ProductCardProps {
   product: Product;
+  search: string;
 }
 
-const priceFormatter = new Intl.NumberFormat('ja-JP');
-
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, search }: ProductCardProps) {
   return (
-    <article className="card">
+    <Link
+      className="card card--link"
+      to={{ pathname: `/product/${product.id}`, search }}
+    >
       <div className="card__imagewrap">
         <img
           className="card__image"
@@ -21,10 +25,10 @@ export function ProductCard({ product }: ProductCardProps) {
         <h2 className="card__name">{product.name}</h2>
         <p className="card__description">{product.description}</p>
         <p className="card__price">
-          ¥{priceFormatter.format(product.price)}
+          ¥{formatPrice(product.price)}
           <span className="card__tax">税込</span>
         </p>
       </div>
-    </article>
+    </Link>
   );
 }

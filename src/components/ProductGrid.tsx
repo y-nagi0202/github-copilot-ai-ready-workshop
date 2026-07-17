@@ -3,9 +3,10 @@ import { ProductCard } from './ProductCard';
 
 interface ProductGridProps {
   products: Product[];
+  search: string;
 }
 
-export function ProductGrid({ products }: ProductGridProps) {
+export function ProductGrid({ products, search }: ProductGridProps) {
   if (products.length === 0) {
     return (
       <p className="empty">
@@ -17,7 +18,7 @@ export function ProductGrid({ products }: ProductGridProps) {
   return (
     <div className="grid">
       {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+        <ProductCard key={product.id} product={product} search={search} />
       ))}
     </div>
   );
