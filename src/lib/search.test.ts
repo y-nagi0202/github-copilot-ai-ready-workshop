@@ -36,4 +36,23 @@ describe('searchProducts', () => {
   it('ヒットしない場合は空配列を返す', () => {
     expect(searchProducts(sample, '存在しない商品')).toEqual([]);
   });
+
+  it('半角・全角スペース区切りの複数キーワードをAND条件で検索する', () => {
+    const halfWidth = searchProducts(sample, 'キャンプ テント');
+    expect(halfWidth.map((p) => p.id)).toEqual([3]);
+
+    const fullWidth = searchProducts(sample, 'キャンプ　テント');
+    expect(fullWidth.map((p) => p.id)).toEqual([3]);
+  });
+
+  it('連続スペースと前後スペースを無視する', () => {
+    const result = searchProducts(sample, '  キャンプ  　 テント  ');
+    expect(result.map((p) => p.id)).toEqual([3]);
+  });
+
+  it('検索しても元の商品配列は変更しない', () => {
+    const original = structuredClone(sample);
+    searchProducts(sample, 'キャンプ テント');
+    expect(sample).toEqual(original);
+  });
 });
