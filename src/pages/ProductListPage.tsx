@@ -27,7 +27,7 @@ export function ProductListPage({ products }: ProductListPageProps) {
       nextParams.set('q', nextQuery);
     }
 
-    setSearchParams(nextParams);
+    setSearchParams(nextParams, { replace: true });
   };
 
   const search = searchParams.toString();
