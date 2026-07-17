@@ -332,6 +332,7 @@ body {
 }
 
 .detail--missing {
+  grid-template-columns: 1fr;
   max-width: 640px;
 }
 
