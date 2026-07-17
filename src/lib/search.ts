@@ -12,8 +12,8 @@ import type { Product } from '../types';
  */
 export function searchProducts(products: Product[], query: string): Product[] {
   const keywords = query
-    .toLowerCase()
     .trim()
+    .toLowerCase()
     .split(/[ \u3000]+/)
     .filter((keyword) => keyword !== '');
 
